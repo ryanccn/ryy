@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { secureHeaders } from "hono/secure-headers";
 import { cors } from "hono/cors";
+import { handleUmami } from "./umami";
 
 import type { Env } from "./env";
 
@@ -26,6 +27,18 @@ app.get("/:id", async (c) => {
 	const id = c.req.param("id");
 	const to = await c.env.KV.get(idToKvKey(id));
 	if (!to) return c.notFound();
+
+	const { UMAMI_INSTANCE, UMAMI_WEBSITE_ID } = c.env;
+	if (UMAMI_INSTANCE && UMAMI_WEBSITE_ID) {
+		c.executionCtx.waitUntil(
+			handleUmami({
+				instance: UMAMI_INSTANCE,
+				key: id,
+				request: c.req.raw,
+				siteId: UMAMI_WEBSITE_ID,
+			})
+		);
+	}
 
 	return makeRedirect(to);
 });
