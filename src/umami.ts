@@ -30,8 +30,6 @@ export const handleUmami = async ({
 	const clientIp = request.headers.get("x-real-ip");
 	if (clientIp) headers.set("x-real-ip", clientIp);
 
-	console.log(headers.get);
-
 	const resp = await fetch(endpoint, {
 		method: "POST",
 		headers,

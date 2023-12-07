@@ -62,4 +62,13 @@ app.put("/:id", async (c) => {
 	return c.json({ ok: true }, 201);
 });
 
+app.delete("/:id", async (c) => {
+	if (!c.env.SECRET) return c.json({ error: "Secret not configured" }, 401);
+	if (c.req.header("authorization") !== `Bearer ${c.env.SECRET}`) return c.json({ error: "Unauthorized" }, 401);
+
+	const id = c.req.param("id");
+	await c.env.KV.delete(idToKvKey(id));
+	return c.json({ ok: true }, 200);
+});
+
 export default app;
