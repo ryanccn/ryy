@@ -11,18 +11,23 @@ app.use("*", cors({ origin: "*" }));
 
 const idToKvKey = (id: string) => `link-v1:${id}`;
 
-app.get("/:id", async (c) => {
-	const id = c.req.param("id");
-	const to = await c.env.KV.get(idToKvKey(id));
-	if (!to) return c.notFound();
-
-	return new Response(`Redirecting to ${to}`, {
+const makeRedirect = (to: string) =>
+	new Response(`Redirecting to ${to}`, {
 		status: 302,
 		headers: {
 			location: to,
 			"content-type": "text/plain; charset=utf-8",
 		},
 	});
+
+app.get("/", () => makeRedirect("https://ryanccn.dev/"));
+
+app.get("/:id", async (c) => {
+	const id = c.req.param("id");
+	const to = await c.env.KV.get(idToKvKey(id));
+	if (!to) return c.notFound();
+
+	return makeRedirect(to);
 });
 
 app.put("/:id", async (c) => {
