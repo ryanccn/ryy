@@ -1,6 +1,6 @@
 name = "ryy"
 main = "src/worker.ts"
-compatibility_date = "2023-11-21"
+compatibility_date = "2023-12-18"
 
 workers_dev = false
 send_metrics = false
