@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   hono:
-    specifier: ^3.12.2
-    version: 3.12.2
+    specifier: ^4.0.4
+    version: 4.0.4
 
 devDependencies:
   '@cloudflare/workers-types':
@@ -1310,8 +1310,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /hono@3.12.2:
-    resolution: {integrity: sha512-h8MlaLiWEeiqMtpQBBhWor4UTu/8bYWuv0yc7DaCRsG3Ny2rXdkXzrYrgc+FWXoyh06CL2QDB/HbjJ9XJLjEhw==}
+  /hono@4.0.4:
+    resolution: {integrity: sha512-WIwMh3b9TrtcdGpJ9ljA74bK/njL6f9S0nH3eBIKVAudnuHDqyVi4k0P8etD9HVU3xu74a9KBg3xA6UlXGEIZg==}
     engines: {node: '>=16.0.0'}
     dev: false
 
