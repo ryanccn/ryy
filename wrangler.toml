@@ -1,0 +1,10 @@
+name = "ryy"
+compatibility_date = "2024-09-09"
+
+workers_dev = false
+send_metrics = false
+no_bundle = true
+
+[[kv_namespaces]]
+binding = "KV"
+id = "bfa5b89e8c58419fa98f59d24c6ae1c5"

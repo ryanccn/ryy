@@ -1,0 +1,16 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer components {
+  :focus,
+  :focus-visible,
+  :focus-within {
+    @apply ring-blue-500 ring-offset-2;
+  }
+
+  input:focus,
+  :is(a, button):focus-visible {
+    @apply ring-2 outline-none;
+  }
+}
