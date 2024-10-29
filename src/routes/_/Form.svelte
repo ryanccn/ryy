@@ -71,6 +71,7 @@
       <input
         name="secret"
         type="password"
+        autocomplete="current-password"
         class="bg-neutral-100 px-2 py-1 rounded-sm text-sm"
         required
       />
