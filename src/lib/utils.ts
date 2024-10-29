@@ -42,8 +42,6 @@ export const verifySecret = (
   const a = te.encode(userSecret);
   const b = te.encode(serverSecret);
 
-  if (a.byteLength !== b.byteLength) return false;
-
   return timingSafeEqual(a, b);
 };
 

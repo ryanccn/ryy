@@ -28,6 +28,12 @@ export const actions = {
       return fail(401, { error: "Secret is invalid" });
     }
 
+    const existing = await platform.env.KV.get(formatKey(data.id));
+
+    if (existing === null) {
+      return fail(400, { error: `Key doesn't exist` });
+    }
+
     await platform.env.KV.put(formatKey(data.id), data.to);
   },
 } satisfies Actions;

@@ -35,6 +35,18 @@
 
   <div class="flex flex-col gap-4">
     <label class="flex flex-col gap-1">
+      <span class="text-xs font-medium">Secret</span>
+      <input
+        name="secret"
+        id="secret"
+        type="password"
+        autocomplete="current-password"
+        class="bg-neutral-100 px-2 py-1 rounded-sm text-sm"
+        required
+      />
+    </label>
+
+    <label class="flex flex-col gap-1">
       <span class="text-xs font-medium">Link</span>
       <div class="relative">
         <span
@@ -44,9 +56,9 @@
         </span>
         <input
           name="id"
+          id="id"
           type="text"
           spellcheck="false"
-          autocomplete="off"
           class="w-full bg-neutral-100 pl-[calc(0.5rem+7ch)] pr-2 py-1 gap-x-0.5 rounded-sm text-sm focus-within:ring-2"
           required
           data-1p-ignore
@@ -59,23 +71,14 @@
         <span class="text-xs font-medium">To</span>
         <input
           name="to"
+          id="to"
           type="url"
           class="bg-neutral-100 px-2 py-1 rounded-sm text-sm"
+          required
           data-1p-ignore
         />
       </label>
     {/if}
-
-    <label class="flex flex-col gap-1">
-      <span class="text-xs font-medium">Secret</span>
-      <input
-        name="secret"
-        type="password"
-        autocomplete="current-password"
-        class="bg-neutral-100 px-2 py-1 rounded-sm text-sm"
-        required
-      />
-    </label>
   </div>
 
   <button

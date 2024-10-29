@@ -31,7 +31,7 @@ export const actions = {
     const existing = await platform.env.KV.get(formatKey(data.id));
 
     if (existing !== null) {
-      return fail(401, { error: `Key already exists: ${existing}` });
+      return fail(400, { error: `Key already exists: ${existing}` });
     }
 
     await platform.env.KV.put(formatKey(data.id), data.to);
