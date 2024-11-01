@@ -6,4 +6,4 @@
   <title>Create / ryy.moe</title>
 </svelte:head>
 
-<Form includeTo />
+<Form includeTo includeNanoid />

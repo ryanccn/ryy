@@ -3,10 +3,20 @@
   import { page } from "$app/stores";
 
   import SendIcon from "~icons/lucide/send";
+  import ShuffleIcon from "~icons/lucide/shuffle";
+
+  import { nanoid } from "nanoid";
+
+  let {
+    includeTo = false,
+    includeNanoid = false,
+  }: {
+    includeTo?: boolean;
+    includeNanoid?: boolean;
+  } = $props();
 
   let submitting = $state(false);
-
-  let { includeTo = false }: { includeTo?: boolean } = $props();
+  let inputId = $state("");
 </script>
 
 <form
@@ -54,6 +64,7 @@
         >
           ryy.moe/
         </span>
+
         <input
           name="id"
           id="id"
@@ -61,8 +72,21 @@
           spellcheck="false"
           class="w-full bg-neutral-100 pl-[calc(0.5rem+7ch)] pr-2 py-1 gap-x-0.5 rounded-sm text-sm focus-within:ring-2"
           required
+          bind:value={inputId}
           data-1p-ignore
         />
+
+        {#if includeNanoid}
+          <button
+            type="button"
+            class="absolute right-0 top-1/2 -translate-y-1/2 my-auto p-1.5"
+            onclick={() => {
+              inputId = nanoid(6);
+            }}
+          >
+            <ShuffleIcon class="block size-3.5" />
+          </button>
+        {/if}
       </div>
     </label>
 
