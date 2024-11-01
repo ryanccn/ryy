@@ -10,7 +10,7 @@ import {
 
 import type { Actions } from "./$types";
 
-const editSchema = vStrictObject({
+const createSchema = vStrictObject({
   id: vPipe(vString(), vMinLength(1)),
   to: vPipe(vString(), vMinLength(1)),
   secret: vPipe(vString(), vMinLength(1)),
@@ -22,7 +22,7 @@ export const actions = {
 
     const data = await request
       .formData()
-      .then((d) => parseFormData(editSchema, d));
+      .then((d) => parseFormData(createSchema, d));
 
     if (!verifySecret(data.secret, platform.env.SECRET)) {
       return fail(401, { error: "Secret is invalid" });
