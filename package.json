@@ -21,7 +21,7 @@
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@ryanccn/eslint-config": "^0.4.1",
     "@sveltejs/adapter-cloudflare": "^4.7.4",
-    "@sveltejs/kit": "^2.0.0",
+    "@sveltejs/kit": "^2.7.4",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@tailwindcss/forms": "^0.5.9",
     "@types/eslint": "^9.6.0",
