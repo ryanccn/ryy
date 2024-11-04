@@ -11,8 +11,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "clsx": "^2.1.1",
     "nanoid": "^5.0.8",
+    "tailwind-merge": "^2.5.4",
     "valibot": "^0.42.1"
   },
   "devDependencies": {

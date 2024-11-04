@@ -2,7 +2,7 @@
   import { page } from "$app/stores";
   import type { Snippet } from "svelte";
 
-  import { clsx } from "clsx";
+  import { twMerge } from "tailwind-merge";
 
   let {
     href,
@@ -17,7 +17,7 @@
 
 <a
   {href}
-  class={clsx([
+  class={twMerge([
     `flex flex-row gap-x-1.5 items-center font-medium text-sm rounded-sm px-2.5 py-1.5 border transition-colors`,
     $page.url.pathname === href
       ? style === "danger"

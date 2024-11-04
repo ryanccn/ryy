@@ -4,7 +4,10 @@
 
   import SendIcon from "~icons/lucide/send";
   import ShuffleIcon from "~icons/lucide/shuffle";
+  import CheckIcon from "~icons/lucide/check";
+  import ClipboardCheckIcon from "~icons/lucide/clipboard-check";
 
+  import { twMerge } from "tailwind-merge";
   import { nanoid } from "nanoid";
 
   let {
@@ -15,7 +18,7 @@
     includeNanoid?: boolean;
   } = $props();
 
-  let submitting = $state(false);
+  let formState = $state<"idle" | "submitting" | "success">("idle");
   let inputId = $state("");
 </script>
 
@@ -23,12 +26,29 @@
   method="POST"
   class="flex flex-col gap-y-4"
   use:enhance={() => {
-    submitting = true;
+    formState = "submitting";
 
     return (ev) => {
+      if (includeTo) {
+        navigator.clipboard
+          .writeText(
+            new URL(`/${encodeURIComponent(inputId)}`, $page.url).toString(),
+          )
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+
       ev.update()
-        .finally(() => {
-          submitting = false;
+        .then(() => {
+          if (ev.result.type === "success") {
+            formState = "success";
+            setTimeout(() => {
+              formState = "idle";
+            }, 3000);
+          } else {
+            formState = "idle";
+          }
         })
         .catch((error) => {
           console.error(error);
@@ -106,10 +126,23 @@
   </div>
 
   <button
-    class="self-end mt-2 flex flex-row items-center gap-x-1.5 text-sm font-medium rounded-sm bg-blue-500 text-white px-2.5 py-1.5 disabled:opacity-75"
-    disabled={submitting}
+    class={twMerge([
+      "self-end mt-2 flex flex-row items-center gap-x-1.5 text-sm font-medium rounded-sm text-white px-2.5 py-1.5 disabled:opacity-75",
+      formState === "success" ? "bg-green-500" : "bg-blue-500",
+    ])}
+    disabled={formState !== "idle"}
   >
-    <SendIcon class="block size-4" />
-    <span>Submit</span>
+    {#if formState === "success"}
+      {#if includeTo}
+        <ClipboardCheckIcon class="block size-4" />
+        <span>Copied to clipboard!</span>
+      {:else}
+        <CheckIcon class="block size-4" />
+        <span>Deleted!</span>
+      {/if}
+    {:else}
+      <SendIcon class="block size-4" />
+      <span>Submit</span>
+    {/if}
   </button>
 </form>
